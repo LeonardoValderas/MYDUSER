@@ -1,6 +1,8 @@
 package com.valdroide.gonzalezdanielauser.main.FragmentMain;
 
 
+import android.content.Context;
+
 import com.valdroide.gonzalezdanielauser.entities.SubCategory;
 
 /**
@@ -8,11 +10,6 @@ import com.valdroide.gonzalezdanielauser.entities.SubCategory;
  */
 public interface FragmentMainInteractor {
     void getListClothes(SubCategory subCategory);
-    /*
-    void getListCategory();
-    void getListSubCategory(int id_category);
-    void getListClothes(int id_category, int id_sub_category);
-    void deleteClothes(Clothes clothes, DateTable dateTable);
-    void clickSwitch(Clothes clothes, DateTable dateTable);
-*/
-}
+    void getDateTable();
+    void refreshLayout(Context context, String date, String category, String subcategory, String clothes, String contact);
+ }

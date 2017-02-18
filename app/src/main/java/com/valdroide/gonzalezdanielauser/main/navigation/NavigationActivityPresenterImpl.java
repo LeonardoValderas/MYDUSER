@@ -35,6 +35,11 @@ public class NavigationActivityPresenterImpl implements NavigationActivityPresen
     }
 
     @Override
+    public void getContact() {
+        interactor.getContact();
+    }
+
+    @Override
     @Subscribe
     public void onEventMainThread(NavigationActivityEvent event) {
         if (this.view != null) {
@@ -43,7 +48,10 @@ public class NavigationActivityPresenterImpl implements NavigationActivityPresen
                     view.setListCategoriesAndSubCategories(event.getCategories(), event.getSubCategories());
                     break;
                 case NavigationActivityEvent.ERROR:
-                    //view.setError(event.getError());
+                    view.setError(event.getError());
+                    break;
+                case NavigationActivityEvent.GETCONTACT:
+                    view.setContact(event.getContact());
                     break;
             }
         }

@@ -60,16 +60,16 @@ public interface APIService {
     @FormUrlEncoded
     @POST("clothes/updateActiveClothes.php")
     Call<Result> updateActiveClothes(@Field("id_clothes") int id_clothes, @Field("is_active") int is_active, @Field("table_date") String table_date);
-
-    //NOTIFICATION
-    @FormUrlEncoded
-    @POST("notification/sendNotification.php")
-    Call<Result> sendNotification(@Field("title") String title, @Field("content") String content);
 */
+    //FCM
+    @FormUrlEncoded
+    @POST("fcm/insertToken.php")
+    Call<Result> insertToken(@Field("old_token") String old_token, @Field("new_token") String new_token);
+
     //SPLASH
     @FormUrlEncoded
     @POST("splashUser/splash.php")
-    Call<Result> sendDateTable(@Field("date_table") String date_table, @Field("category") String category, @Field("subcategory") String subcategory, @Field("clothes") String clothes);
+    Call<Result> sendDateTable(@Field("date_table") String date_table, @Field("category") String category, @Field("subcategory") String subcategory, @Field("clothes") String clothes, @Field("contact") String contact);
 
     @POST("splashUser/splash.php")
     Call<Result> getAllData();

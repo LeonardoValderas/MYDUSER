@@ -1,5 +1,7 @@
 package com.valdroide.gonzalezdanielauser.main.splash;
 
+import android.content.Context;
+
 import com.valdroide.gonzalezdanielauser.lib.base.EventBus;
 import com.valdroide.gonzalezdanielauser.main.splash.events.SplashActivityEvent;
 import com.valdroide.gonzalezdanielauser.main.splash.ui.SplashActivityView;
@@ -35,13 +37,18 @@ public class SplashActivityPresenterImpl implements SplashActivityPresenter {
     }
 
     @Override
-    public void setDateTable(String date, String category, String subcategory, String clothes) {
-        interactor.setDateTable(date, category, subcategory, clothes);
+    public void setDateTable(Context context, String date, String category, String subcategory, String clothes, String contact) {
+        interactor.setDateTable(context, date, category, subcategory, clothes, contact);
     }
 
     @Override
-    public void getAllData() {
-        interactor.getAllData();
+    public void getAllData(Context context) {
+        interactor.getAllData(context);
+    }
+
+    @Override
+    public void validateToken(Context context) {
+        interactor.validateToken(context);
     }
 
     @Override

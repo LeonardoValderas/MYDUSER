@@ -1,6 +1,5 @@
 package com.valdroide.gonzalezdanielauser.main.navigation.ui.adapters;
 
-
 import android.annotation.SuppressLint;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -40,26 +39,6 @@ public class FragmentNavigationManager implements NavigationManager {
     public void showFragmentAction(SubCategory subCategory) {
         showFragment(FragmentMain.newInstance(subCategory), false);
     }
-
-//    @Override
-//    public void showFragmentComedy(String title) {
-//        showFragment(FragmentComedy.newInstance(title), false);
-//    }
-//
-//    @Override
-//    public void showFragmentDrama(String title) {
-//        showFragment(FragmentDrama.newInstance(title), false);
-//    }
-//
-//    @Override
-//    public void showFragmentMusical(String title) {
-//        showFragment(FragmentMusical.newInstance(title), false);
-//    }
-//
-//    @Override
-//    public void showFragmentThriller(String title) {
-//        showFragment(FragmentThriller.newInstance(title), false);
-//    }
 
     private void showFragment(Fragment fragment, boolean allowStateLoss) {
         FragmentManager fm = mFragmentManager;

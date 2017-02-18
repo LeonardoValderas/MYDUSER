@@ -16,4 +16,9 @@ public class NavigationActivityInteractorImpl implements NavigationActivityInter
     public void getCategoriesAndSubCategories() {
         repository.getCategoriesAndSubCategories();
     }
+
+    @Override
+    public void getContact() {
+        repository.getContact();
+    }
 }

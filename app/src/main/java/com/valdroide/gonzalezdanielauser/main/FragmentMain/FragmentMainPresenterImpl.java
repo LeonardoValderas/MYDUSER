@@ -1,4 +1,7 @@
 package com.valdroide.gonzalezdanielauser.main.FragmentMain;
+
+import android.content.Context;
+
 import com.valdroide.gonzalezdanielauser.entities.SubCategory;
 import com.valdroide.gonzalezdanielauser.lib.base.EventBus;
 import com.valdroide.gonzalezdanielauser.main.FragmentMain.events.FragmentMainEvent;
@@ -7,7 +10,6 @@ import com.valdroide.gonzalezdanielauser.main.FragmentMain.ui.FragmentMainView;
 import org.greenrobot.eventbus.Subscribe;
 
 public class FragmentMainPresenterImpl implements FragmentMainPresenter {
-
 
     private FragmentMainView view;
     private EventBus eventBus;
@@ -34,32 +36,16 @@ public class FragmentMainPresenterImpl implements FragmentMainPresenter {
         interactor.getListClothes(subCategory);
     }
 
-    /*
-        @Override
-        public void getListCategory() {
-            interactor.getListCategory();
-        }
+    @Override
+    public void getDateTable() {
+        interactor.getDateTable();
+    }
 
-        @Override
-        public void getListSubCategory(int id_category) {
-            interactor.getListSubCategory(id_category);
-        }
+    @Override
+    public void refreshLayout(Context context, String date, String category, String subcategory, String clothes, String contact) {
+        interactor.refreshLayout(context, date, category, subcategory, clothes, contact);
+    }
 
-        @Override
-        public void getListClothes(int id_category, int id_sub_category) {
-            interactor.getListClothes(id_category, id_sub_category);
-        }
-
-        @Override
-        public void deleteClothes(Clothes clothes, DateTable dateTable) {
-            interactor.deleteClothes(clothes, dateTable);
-        }
-
-        @Override
-        public void clickSwitch(Clothes clothes, DateTable dateTable) {
-            interactor.clickSwitch(clothes, dateTable);
-        }
-    */
     @Override
     @Subscribe
     public void onEventMainThread(FragmentMainEvent event) {
@@ -67,6 +53,15 @@ public class FragmentMainPresenterImpl implements FragmentMainPresenter {
             switch (event.getType()) {
                 case FragmentMainEvent.GETLISTCLOTHES:
                     view.setListClothes(event.getClothesList());
+                    break;
+                case FragmentMainEvent.WITHOUTCHANGE:
+                    view.withoutChange();
+                    break;
+                case FragmentMainEvent.CALLCLHOTHES:
+                    view.callClothes();
+                    break;
+                case FragmentMainEvent.GETDATETABLE:
+                    view.setDateTable(event.getDateTables());
                     break;
                 case FragmentMainEvent.ERROR:
                     view.setError(event.getError());

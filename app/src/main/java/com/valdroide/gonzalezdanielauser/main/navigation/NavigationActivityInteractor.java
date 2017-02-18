@@ -6,4 +6,5 @@ package com.valdroide.gonzalezdanielauser.main.navigation;
 
 public interface NavigationActivityInteractor {
     void getCategoriesAndSubCategories();
+    void getContact();
 }

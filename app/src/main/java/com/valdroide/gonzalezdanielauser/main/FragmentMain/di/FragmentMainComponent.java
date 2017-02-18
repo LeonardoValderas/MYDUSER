@@ -12,6 +12,4 @@ import dagger.Component;
 @Component(modules = {FragmentMainModule.class, LibsModule.class, GonzalezDanielaUserAppModule.class})
 public interface FragmentMainComponent {
       void inject(FragmentMain fragment);
-
-//    FragmentMainPresenter getPresenter();
 }

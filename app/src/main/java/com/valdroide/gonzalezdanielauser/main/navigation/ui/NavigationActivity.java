@@ -12,15 +12,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.valdroide.gonzalezdanielauser.GonzalezDanielaUserApp;
 import com.valdroide.gonzalezdanielauser.R;
 import com.valdroide.gonzalezdanielauser.entities.Category;
+import com.valdroide.gonzalezdanielauser.entities.Contact;
 import com.valdroide.gonzalezdanielauser.entities.SubCategory;
 import com.valdroide.gonzalezdanielauser.main.navigation.NavigationActivityPresenter;
+import com.valdroide.gonzalezdanielauser.main.navigation.dialogs.DialogClickContact;
 import com.valdroide.gonzalezdanielauser.main.navigation.ui.adapters.CustomExpandableListAdapter;
 import com.valdroide.gonzalezdanielauser.main.navigation.ui.adapters.ExpandableListDataSource;
 import com.valdroide.gonzalezdanielauser.main.navigation.ui.adapters.FragmentNavigationManager;
 import com.valdroide.gonzalezdanielauser.main.navigation.ui.adapters.NavigationManager;
+import com.valdroide.gonzalezdanielauser.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +56,11 @@ public class NavigationActivity extends AppCompatActivity implements NavigationA
 
     private NavigationManager mNavigationManager;
     List<SubCategory> value;
+    private Contact contact;
+    private int positionChild = 0;
+    private InterstitialAd mInterstitialAd;
+    private AdRequest adRequest;
+    private int conteo = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +80,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationA
         addDrawerItems();
         presenter.getCategoriesAndSubCategories();
         setupDrawer();
-
+        InterstitialAd();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setTitle("M & D");
@@ -81,14 +91,6 @@ public class NavigationActivity extends AppCompatActivity implements NavigationA
         app.getNavigationActivityComponent(this, this, this).inject(this);
     }
 
-    private void selectFirstItemAsDefault() {
-        if (mNavigationManager != null) {
-            //       String firstActionMovie = getResources().getStringArray(R.array.actionFilms)[0];
-            mNavigationManager.showFragmentAction(new SubCategory());
-            //  getSupportActionBar().setTitle(firstActionMovie);
-        }
-    }
-
     @Override
     public void setListCategoriesAndSubCategories(List<Category> categories, List<SubCategory> subCategories) {
         mExpandableListData = ExpandableListDataSource.getData(categories, subCategories);
@@ -96,20 +98,53 @@ public class NavigationActivity extends AppCompatActivity implements NavigationA
         mExpandableListAdapter.setList(mExpandableListTitle, mExpandableListData);
     }
 
+    public void InterstitialAd() {
+        mInterstitialAd = new InterstitialAd(NavigationActivity.this);
+        mInterstitialAd.setAdUnitId(getString(R.string.interstitial_navigation));
+
+        adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("B52960D9E6A2A5833E82FEA8ACD4B80C")
+                .build();
+        mInterstitialAd.loadAd(adRequest);
+    }
+
+    private void showInterstitial() {
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        }
+    }
+
+    public void conteoClick() {
+        if (conteo == 10) {
+            showInterstitial();
+            conteo = 0;
+        } else {
+            conteo++;
+        }
+    }
+
+    @Override
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
+
+    @Override
+    public void setError(String msg) {
+        Utils.showSnackBar(mDrawerLayout, msg);
+    }
+
     private void addDrawerItems() {
         mExpandableListView.setAdapter(mExpandableListAdapter);
         mExpandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
             public void onGroupExpand(int groupPosition) {
-                //getSupportActionBar().setTitle(mExpandableListTitle.get(groupPosition).toString());
-             //   getSupportActionBar().setTitle("LISTA DE ROPA");
             }
         });
 
         mExpandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
             @Override
             public void onGroupCollapse(int groupPosition) {
-                //getSupportActionBar().setTitle("LISTA DE ROPA");
             }
         });
 
@@ -118,7 +153,9 @@ public class NavigationActivity extends AppCompatActivity implements NavigationA
             public boolean onChildClick(ExpandableListView parent, View v,
                                         int groupPosition, int childPosition, long id) {
                 value = mExpandableListData.get(mExpandableListTitle.get(groupPosition));
-                mNavigationManager.showFragmentAction(value.get(0));
+                positionChild = childPosition;
+                mNavigationManager.showFragmentAction(value.get(childPosition));
+                conteoClick();
                 mDrawerLayout.closeDrawer(GravityCompat.START);
                 return false;
             }
@@ -146,9 +183,9 @@ public class NavigationActivity extends AppCompatActivity implements NavigationA
 
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
-                if(value != null)
-                if(value.get(0) != null)
-                getSupportActionBar().setTitle(value.get(0).getSUBCATEGORY());
+                if (value != null)
+                    if (value.get(positionChild) != null)
+                        getSupportActionBar().setTitle(value.get(positionChild).getSUBCATEGORY());
                 invalidateOptionsMenu();
             }
         };
@@ -184,13 +221,13 @@ public class NavigationActivity extends AppCompatActivity implements NavigationA
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
+        if (id == R.id.contact) {
+            presenter.getContact();
+            new DialogClickContact(this, contact);
+        }
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
-
-
 }

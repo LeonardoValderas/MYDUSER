@@ -1,6 +1,5 @@
 package com.valdroide.gonzalezdanielauser.main.FragmentMain.di;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 
@@ -34,7 +33,6 @@ public class FragmentMainModule {
     FragmentMainView view;
     Fragment fragment;
     OnItemClickListener onItemClickListener;
-    Context context;
 
     public FragmentMainModule(FragmentMainView view, Fragment fragment, OnItemClickListener onItemClickListener) {
         this.view = view;

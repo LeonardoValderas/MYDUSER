@@ -2,6 +2,7 @@ package com.valdroide.gonzalezdanielauser.main.navigation.events;
 
 
 import com.valdroide.gonzalezdanielauser.entities.Category;
+import com.valdroide.gonzalezdanielauser.entities.Contact;
 import com.valdroide.gonzalezdanielauser.entities.SubCategory;
 
 import java.util.List;
@@ -12,8 +13,10 @@ import java.util.List;
 public class NavigationActivityEvent {
     private int type;
     public static final int GETCATEGORIESANDSUBCATEGORIES = 0;
+    public static final int GETCONTACT = 1;
     public static final int ERROR = 2;
     private String error;
+    private Contact contact;
     private List<Category> categories;
     private List<SubCategory> subCategories;
 
@@ -47,5 +50,13 @@ public class NavigationActivityEvent {
 
     public void setSubCategories(List<SubCategory> subCategories) {
         this.subCategories = subCategories;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
     }
 }

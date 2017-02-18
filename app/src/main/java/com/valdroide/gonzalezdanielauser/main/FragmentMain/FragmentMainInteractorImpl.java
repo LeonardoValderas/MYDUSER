@@ -1,6 +1,8 @@
 package com.valdroide.gonzalezdanielauser.main.FragmentMain;
 
 
+import android.content.Context;
+
 import com.valdroide.gonzalezdanielauser.entities.SubCategory;
 
 public class FragmentMainInteractorImpl implements FragmentMainInteractor {
@@ -15,30 +17,14 @@ public class FragmentMainInteractorImpl implements FragmentMainInteractor {
     public void getListClothes(SubCategory subCategory) {
         repository.getListClothes(subCategory);
     }
-/*
+
     @Override
-    public void getListCategory() {
-        repository.getListCategory();
+    public void getDateTable() {
+        repository.getDateTable();
     }
 
     @Override
-    public void getListSubCategory(int id_category) {
-        repository.getListSubCategory(id_category);
+    public void refreshLayout(Context context, String date, String category, String subcategory, String clothes, String contact) {
+        repository.refreshLayout(context, date, category, subcategory, clothes, contact);
     }
-
-    @Override
-    public void getListClothes(int id_category, int id_sub_category) {
-        repository.getListClothes(id_category, id_sub_category);
-    }
-
-    @Override
-    public void deleteClothes(Clothes clothes, DateTable dateTable) {
-        repository.deleteClothes(clothes, dateTable);
-    }
-
-    @Override
-    public void clickSwitch(Clothes clothes, DateTable dateTable) {
-        repository.clickSwitch(clothes, dateTable);
-    }
-    */
 }

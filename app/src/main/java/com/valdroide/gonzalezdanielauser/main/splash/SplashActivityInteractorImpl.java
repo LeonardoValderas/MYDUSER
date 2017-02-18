@@ -1,5 +1,7 @@
 package com.valdroide.gonzalezdanielauser.main.splash;
 
+import android.content.Context;
+
 public class SplashActivityInteractorImpl implements SplashActivityInteractor {
 
     private SplashActivityRepository repository;
@@ -14,12 +16,17 @@ public class SplashActivityInteractorImpl implements SplashActivityInteractor {
     }
 
     @Override
-    public void getAllData() {
-        repository.getAllData();
+    public void getAllData(Context context) {
+        repository.getAllData(context);
     }
 
     @Override
-    public void setDateTable(String date, String category, String subcategory, String clothes) {
-        repository.setDateTable(date, category, subcategory, clothes);
+    public void validateToken(Context context) {
+        repository.validateToken(context);
+    }
+
+    @Override
+    public void setDateTable(Context context, String date, String category, String subcategory, String clothes, String contact) {
+        repository.setDateTable(context, date, category, subcategory, clothes, contact);
     }
 }

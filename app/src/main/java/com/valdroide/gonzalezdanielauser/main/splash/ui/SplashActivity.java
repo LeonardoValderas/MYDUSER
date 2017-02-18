@@ -13,6 +13,7 @@ import com.valdroide.gonzalezdanielauser.R;
 import com.valdroide.gonzalezdanielauser.entities.DateTable;
 import com.valdroide.gonzalezdanielauser.main.navigation.ui.NavigationActivity;
 import com.valdroide.gonzalezdanielauser.main.splash.SplashActivityPresenter;
+import com.valdroide.gonzalezdanielauser.utils.Utils;
 
 import java.util.List;
 
@@ -35,10 +36,6 @@ public class SplashActivity extends AppCompatActivity implements SplashActivityV
     @Bind(R.id.textViewDownload)
     TextView textViewDownload;
 
-    final static String TABLE = "TABLES";
-    final static String CATEGORY = "CATEGORY";
-    final static String SUBCATEGORY = "SUBCATEGORY";
-    final static String CLOTHES = "CLOTHES";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +44,7 @@ public class SplashActivity extends AppCompatActivity implements SplashActivityV
         ButterKnife.bind(this);
         setupInjection();
         presenter.onCreate();
+        presenter.validateToken(this);
         getDateTable();
     }
 
@@ -63,29 +61,32 @@ public class SplashActivity extends AppCompatActivity implements SplashActivityV
 
     @Override
     public void getDateTableEmpty() {
-        presenter.getAllData();
+        presenter.getAllData(this);
     }
 
     @Override
     public void setDateTable(List<DateTable> dateTables) {
-        String date = "",cat = "", sub = "", clo = "";
+        String date = "",cat = "", sub = "", clo = "", contact = "";
         for (int i = 0; i <dateTables.size() ; i++) {
             switch (dateTables.get(i).getTABLENAME()){
-                case TABLE:
+                case Utils.TABLE:
                     date = dateTables.get(i).getDATE();
                     break;
-                case CATEGORY:
+                case Utils.CATEGORY:
                     cat = dateTables.get(i).getDATE();
                     break;
-                case SUBCATEGORY:
+                case Utils.SUBCATEGORY:
                     sub = dateTables.get(i).getDATE();
                     break;
-                case CLOTHES:
+                case Utils.CLOTHES:
                     clo = dateTables.get(i).getDATE();
+                    break;
+                case Utils.CONTACT:
+                    contact = dateTables.get(i).getDATE();
                     break;
             }
         }
-        presenter.setDateTable(date, cat, sub, clo);
+        presenter.setDateTable(this, date, cat, sub, clo, contact);
     }
 
     public void getDateTable() {

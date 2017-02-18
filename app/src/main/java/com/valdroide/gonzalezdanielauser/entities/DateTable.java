@@ -7,9 +7,7 @@ import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 import com.valdroide.gonzalezdanielauser.db.ClothesDatabase;
 
-/**
- * Created by LEO on 29/1/2017.
- */
+
 @Table(database = ClothesDatabase.class)
 public class DateTable extends BaseModel {
 

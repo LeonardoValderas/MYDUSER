@@ -2,6 +2,7 @@ package com.valdroide.gonzalezdanielauser.entities;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.internal.ConstructorConstructor;
 
 import java.util.List;
 
@@ -13,9 +14,6 @@ public class Result {
     @SerializedName("message")
     @Expose
     String message;
-    //    @SerializedName("id")
-//    @Expose
-//    int id;
     @SerializedName("date_table")
     @Expose
     List<DateTable> date_table;
@@ -28,10 +26,12 @@ public class Result {
     @SerializedName("clothes")
     @Expose
     List<Clothes> clothes;
+    @SerializedName("contact")
+    @Expose
+    List<Contact> contacts;
     @SerializedName("responseData")
     @Expose
     List<ResponseWS> responseData;
-
 
     public String getSuccess() {
         return success;
@@ -48,14 +48,6 @@ public class Result {
     public void setMessage(String message) {
         this.message = message;
     }
-//
-//    public int getId() {
-//        return id;
-//    }
-
-    //   public void setId(int id) {
-    //      this.id = id;
-    // }
 
     public List<DateTable> getDate_table() {
         return date_table;
@@ -95,5 +87,13 @@ public class Result {
 
     public void setResponseData(List<ResponseWS> responseData) {
         this.responseData = responseData;
+    }
+
+    public List<Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(List<Contact> contacts) {
+        this.contacts = contacts;
     }
 }

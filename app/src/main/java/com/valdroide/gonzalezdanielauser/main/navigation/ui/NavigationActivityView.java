@@ -1,6 +1,7 @@
 package com.valdroide.gonzalezdanielauser.main.navigation.ui;
 
 import com.valdroide.gonzalezdanielauser.entities.Category;
+import com.valdroide.gonzalezdanielauser.entities.Contact;
 import com.valdroide.gonzalezdanielauser.entities.SubCategory;
 
 import java.util.List;
@@ -11,4 +12,6 @@ import java.util.List;
 
 public interface NavigationActivityView {
    void setListCategoriesAndSubCategories(List<Category> categories, List<SubCategory> subCategories);
+   void setContact(Contact contact);
+   void setError(String msg);
 }

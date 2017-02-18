@@ -1,6 +1,5 @@
 package com.valdroide.gonzalezdanielauser.main.FragmentMain.ui.adapters;
 
-
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -53,21 +52,8 @@ public class FragmentMainAdapter extends RecyclerView.Adapter<FragmentMainAdapte
         return clothesList.size();
     }
 
-    public void removeClothes(Clothes clothes) {
-        clothesList.remove(clothes);
-        notifyDataSetChanged();
-    }
-
     public void setClothes(List<Clothes> clothes) {
         this.clothesList = clothes;
-        notifyDataSetChanged();
-    }
-    public void updateAdapter(Clothes clothes) {
-        for (int i = 0; i < this.clothesList.size(); i++) {
-            if (this.clothesList.get(i).getID_CLOTHES_KEY() == clothes.getID_CLOTHES_KEY())
-                this.clothesList.get(i).setISACTIVE(clothes.getISACTIVE());
-            break;
-        }
         notifyDataSetChanged();
     }
 
@@ -92,13 +78,6 @@ public class FragmentMainAdapter extends RecyclerView.Adapter<FragmentMainAdapte
                     listener.onClick(v, position);
                 }
             });
-//            linearConteiner.setOnLongClickListener(new View.OnLongClickListener() {
-//                @Override
-//                public boolean onLongClick(View v) {
-//                    listener.onLongClick(v, position);
-//                    return true;
-//                }
-//            });
         }
     }
 }

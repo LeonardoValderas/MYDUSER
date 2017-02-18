@@ -10,5 +10,6 @@ public interface NavigationActivityPresenter {
     void onCreate();
     void onDestroy();
     void getCategoriesAndSubCategories();
+    void getContact();
     void onEventMainThread(NavigationActivityEvent event);
 }

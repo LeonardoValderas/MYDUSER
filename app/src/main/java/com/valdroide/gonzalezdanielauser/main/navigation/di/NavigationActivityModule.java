@@ -28,14 +28,11 @@ import dagger.Provides;
 @Module
 public class NavigationActivityModule {
     NavigationActivityView view;
-    //OnItemClickListener onItemClickListener;
     Context context;
 
     public NavigationActivityModule(Context context, NavigationActivityView view) {
         this.context = context;
         this.view = view;
-
-        //  this.onItemClickListener = onItemClickListener;
     }
 
     @Provides
@@ -61,13 +58,6 @@ public class NavigationActivityModule {
     NavigationActivityRepository providesNavigationActivityRepository(EventBus eventBus, APIService service) {
         return new NavigationActivityRepositoryImpl(eventBus, service);
     }
-
-
-    //    @Provides
-//    @Singleton
-//    Context providesContext() {
-//        return this.context;
-//    }
     @Provides
     @Singleton
     Map<String, List<SubCategory>> providesExpandableListDetail() {
@@ -84,41 +74,10 @@ public class NavigationActivityModule {
     @Provides
     @Singleton
     CustomExpandableListAdapter providesCustomExpandableListAdapter(Context
-                                                                context, List<String> expandableListTitle,
-                                                        Map<String, List<SubCategory>> expandableListDetail) {
+                                                                            context, List<String> expandableListTitle,
+                                                                    Map<String, List<SubCategory>> expandableListDetail) {
         return new CustomExpandableListAdapter(context, expandableListTitle, expandableListDetail);
     }
-
-
-//    @Provides
-//    @Singleton
-//    AdapterSpinnerCategory providesAdapterSpinnerCategory(Context context, int resource, List<Category> categoriesArray) {
-//        return new AdapterSpinnerCategory(context, resource, categoriesArray);
-//    }
-//
-//    @Provides
-//    @Singleton
-//    OnItemClickListener providesOnItemClickListener() {
-//        return this.onItemClickListener;
-//    }
-//
-//    @Provides
-//    @Singleton
-//    List<Category> providesCategoryList() {
-//        return new ArrayList<Category>();
-//    }
-//
-//    @Provides
-//    @Singleton
-//    List<SubCategory> providesSubCategoryList() {
-//        return new ArrayList<SubCategory>();
-//    }
-//
-//    @Provides
-//    @Singleton
-//    int providesResource() {
-//        return R.layout.support_simple_spinner_dropdown_item;
-//    }
 
     @Provides
     @Singleton
